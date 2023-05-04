@@ -62,8 +62,7 @@ public class GirisKarakter : MonoBehaviour
 
     public void FareTekerlegi(InputAction.CallbackContext context)  // fare tekerlegi degeri
     {
-        fareTekerlegi = context.ReadValue<float>();
-        Debug.Log(fareTekerlegi);
+        fareTekerlegi = context.ReadValue<float>(); // her harekette 120 ya da -120 degerini donduruyor
     }
 
 

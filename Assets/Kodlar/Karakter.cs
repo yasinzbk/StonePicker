@@ -5,6 +5,9 @@ using UnityEngine;
 public class Karakter : MonoBehaviour
 {
 
+    public delegate void ElindekiEsyaDegistiginde();
+    public ElindekiEsyaDegistiginde elindekiEsyaDegistigindeGeriCagir;
+
     private GirisKarakter giris;
 
     public float hareketHizi = 2f;
@@ -18,6 +21,13 @@ public class Karakter : MonoBehaviour
     //Gecici Alan
     public int yuzununYonu = 1;
 
+    public Esya elindekiEsya;
+
+    public Esya defaultEsya;
+
+    public Weapon kazma;
+    public GridKontrol gridKontrol;
+
     private void Awake()
     {
         RB = GetComponent<Rigidbody2D>();
@@ -25,6 +35,12 @@ public class Karakter : MonoBehaviour
     void Start()
     {
         giris = GetComponent<GirisKarakter>();
+
+        if (elindekiEsya == null)
+        {
+            EsyaKullan(defaultEsya);
+
+        }
 
     }
     void Update()
@@ -87,4 +103,27 @@ public class Karakter : MonoBehaviour
             SuankiHiz = calismaAlani;
     }
 
+
+    public void EsyaKullan(Esya esya) // karakter slotttaki secili itemin niteligine sahip olur 
+    {
+        elindekiEsya = esya;
+        //  elindeki objeyi secili objenin sprite ina donustur
+        if (elindekiEsyaDegistigindeGeriCagir != null)
+        {
+            elindekiEsyaDegistigindeGeriCagir.Invoke();
+        }
+        switch (esya.nitelik)
+            {
+                case Esya.EsyaNiteligi.kazma:
+                kazma.Kullan();
+
+                    break;
+                case Esya.EsyaNiteligi.toprak:
+                gridKontrol.Kullan();
+                    break;
+
+            }
+
+
+    }
 }

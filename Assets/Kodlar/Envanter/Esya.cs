@@ -9,17 +9,12 @@ public class Esya : ScriptableObject
     public string isim = "Yesi Esya";
     public Sprite ikon = null;
     public bool toplandiMi = false;
+    public EsyaNiteligi nitelik;
 
 
-
-    public virtual void Kullan()
+    public enum EsyaNiteligi
     {
-        // Esyayi kullanir bisi olur
-
-        Debug.Log(isim + " Esya Kullaniliyor ");
-
-
-
-
+        kazma,
+        toprak
     }
 }

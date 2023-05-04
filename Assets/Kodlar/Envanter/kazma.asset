@@ -10,9 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e84d4c19da54e9a4495b83458766d35a, type: 3}
-  m_Name: esyaDenem1 2
+  m_Name: kazma
   m_EditorClassIdentifier: 
-  isim: ueyrtye
-  ikon: {fileID: 21300000, guid: 5746c43155dede848b594f27828ea1e3, type: 3}
-  toplandiMi: 1
-  nitelik: 1
+  isim: kazma
+  ikon: {fileID: 21300000, guid: 152d1c2cd3a47f94984686fe62c0b9bf, type: 3}
+  toplandiMi: 0

@@ -28,8 +28,6 @@ public class Envanter : MonoBehaviour
 
     public List<Esya> esyalar = new List<Esya>();
 
-
-
     public bool Ekle(Esya esya)
     {
         if (esyalar.Count >= bosYer)
@@ -56,4 +54,5 @@ public class Envanter : MonoBehaviour
             esyaDegistigindeGeriCagir.Invoke();
         }
     }
+
 }

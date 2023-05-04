@@ -8,18 +8,40 @@ public class GridKontrol : MonoBehaviour
     [SerializeField] Tilemap sablonTileMap;
     [SerializeField] GridYoneticisi gridYoneticisi;
 
+    public GirisKarakter giris;
+
+    private bool kullan; // KALKabilir amele yontemi
+
+    public Karakter karakter;
+
+    private void Start()
+    {
+        karakter.elindekiEsyaDegistigindeGeriCagir += SifirlaKullan;
+    }
+
     private void Update()
     {
-       // ZeminEkle();
+      ZeminEkle();
     }
 
     private void ZeminEkle()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (giris.saldiri && kullan)
         {
-            Vector3 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            giris.SaldiriGirisiniKullan();
+            Vector3 worldPoint = giris.fareKonumu;
             Vector3Int tiklananPozisyon = sablonTileMap.WorldToCell(worldPoint); // world pozisyonu en yakin hucreye ayarliyor olmasi lazim(yani en yakin int degerlerine)
             gridYoneticisi.Ekle(tiklananPozisyon.x, tiklananPozisyon.y, 0);
         }
+    }
+
+    public void Kullan()
+    {
+        kullan = !kullan;
+    }
+
+    void SifirlaKullan()
+    {
+        kullan = false;
     }
 }

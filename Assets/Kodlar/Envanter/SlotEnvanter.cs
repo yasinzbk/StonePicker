@@ -31,12 +31,21 @@ public class SlotEnvanter : MonoBehaviour
         ikon.enabled = false;
     }
 
-    public void EsyayiKullan()
+    public void EsyayiKullan()  // evet esya kullanmayi yapcam ama bu yontem cok amele yontemi
     {
 
         if (esya != null)
         {
-            esya.Kullan();
+            switch (esya.nitelik)
+            {
+                case Esya.EsyaNiteligi.kazma:
+                    
+                    break;
+                case Esya.EsyaNiteligi.toprak:
+
+                    break;
+
+            }
 
 
         }

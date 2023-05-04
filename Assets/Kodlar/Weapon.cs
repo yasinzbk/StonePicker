@@ -9,11 +9,11 @@ public class Weapon : MonoBehaviour
 
     public Camera mainCamera;
     public LayerMask resourceMask;
-    public GameObject character;
+    public Karakter karakter;
     public Vector2 characterPosition { get; private set; }
 
     private GirisKarakter giris;
-    private bool kullan;
+    private bool kullan; // kalkabilir amele yontemi
 
     public float yakinMesKarakterin = 5f;
 
@@ -23,6 +23,7 @@ public class Weapon : MonoBehaviour
     {
         giris = GetComponent<GirisKarakter>();
         anim = GetComponent<Animator>();
+        karakter.elindekiEsyaDegistigindeGeriCagir += SifirlaKullan;
     }
 
     void Update()
@@ -32,7 +33,7 @@ public class Weapon : MonoBehaviour
 
     public void Shoot()
     {
-        if (giris.saldiri)  // yeni input sistemde fareye erisime bak
+        if (giris.saldiri && kullan)  // yeni input sistemde fareye erisime bak
         {
             giris.SaldiriGirisiniKullan();
             Debug.Log("yarraaaaaaaaa");
@@ -81,6 +82,11 @@ public class Weapon : MonoBehaviour
     public void VurAnim()
     {
         anim.SetBool("vur", false);
+    }
+
+    void SifirlaKullan()
+    {
+        kullan = false;
     }
 }
 
