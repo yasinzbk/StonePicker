@@ -17,6 +17,7 @@ public class GirisKarakter : MonoBehaviour
     public bool saldiri { get; private set; }
 
     public Vector3 fareKonumu { get; private set; }
+    public float fareTekerlegi { get; private set; }
 
     public Weapon silah;
 
@@ -57,7 +58,17 @@ public class GirisKarakter : MonoBehaviour
 
     public void SaldiriGirisiniKullan() => saldiri = false;
 
-    private void OnEnable()
+
+
+    public void FareTekerlegi(InputAction.CallbackContext context)  // fare tekerlegi degeri
+    {
+        fareTekerlegi = context.ReadValue<float>();
+        Debug.Log(fareTekerlegi);
+    }
+
+
+
+    private void OnEnable()  // fare icin gerekli
     {
         // Mouse girdisi etkinleþtirilir
         InputSystem.EnableDevice(Mouse.current);

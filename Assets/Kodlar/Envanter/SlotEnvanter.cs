@@ -10,6 +10,7 @@ public class SlotEnvanter : MonoBehaviour
 
     public Esya esya;
 
+    public GameObject cerceve;
 
     public void EsyaEkle(Esya yeniEsya)
     {
@@ -39,5 +40,15 @@ public class SlotEnvanter : MonoBehaviour
 
 
         }
+    }
+
+    public void EsyayiSec() //esya seciliyken olacaklar
+    {
+        cerceve.SetActive(true);
+    }
+
+    public void EsyayiTerket()
+    {
+        cerceve.SetActive(false);
     }
 }
