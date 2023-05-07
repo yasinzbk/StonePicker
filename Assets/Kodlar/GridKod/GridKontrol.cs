@@ -14,9 +14,13 @@ public class GridKontrol : MonoBehaviour
 
     public Karakter karakter;
 
+     public Animator anim;
+
+
     private void Start()
     {
         karakter.elindekiEsyaDegistigindeGeriCagir += SifirlaKullan;
+
     }
 
     private void Update()
@@ -28,6 +32,8 @@ public class GridKontrol : MonoBehaviour
     {
         if (giris.saldiri && kullan)
         {
+            anim.SetBool("vur", true);
+
             giris.SaldiriGirisiniKullan();
             Vector3 worldPoint = giris.fareKonumu;
             Vector3Int tiklananPozisyon = sablonTileMap.WorldToCell(worldPoint); // world pozisyonu en yakin hucreye ayarliyor olmasi lazim(yani en yakin int degerlerine)

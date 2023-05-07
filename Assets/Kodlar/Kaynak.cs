@@ -2,12 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Health : MonoBehaviour
+public class Kaynak : MonoBehaviour
 {
     public float startingHealth = 100; // Baþlangýç saðlýðý
     public float currentHealth; // Mevcut saðlýk
     public bool isDead = false; // Ölü mü?
 
+    public GameObject cerceve;
+
+    public GameObject tasCevher;
+    public float dagilma;
     void Start()
     {
         currentHealth = startingHealth; // Baþlangýçta mevcut saðlýk, baþlangýç saðlýðýna eþit olacak
@@ -32,7 +36,32 @@ public class Health : MonoBehaviour
             // Ölümle ilgili ek iþlemler yapabilirsiniz
             // Örneðin, ölüm animasyonunu oynatmak
             // veya nesneyi yok etmek
+            GameObject kaynak = Instantiate(tasCevher);
+            kaynak.transform.position = new Vector2(transform.position.x + dagilma, transform.position.y + dagilma);
+
+            GameObject kaynak2 = Instantiate(tasCevher);
+            kaynak2.transform.position = new Vector2(transform.position.x + dagilma, transform.position.y - dagilma);
+
+
             Destroy(gameObject);
         }
     }
+
+
+    private void OnMouseExit()
+    {
+        CerceveKapa();
+
+    }
+
+    public void CerceveAc()
+    {
+        cerceve.SetActive(true);
+    }
+    public void CerceveKapa()
+    {
+        cerceve.SetActive(false);
+    }
+
+        
 }

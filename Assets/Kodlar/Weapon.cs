@@ -5,11 +5,12 @@ using UnityEngine.InputSystem;
 
 public class Weapon : MonoBehaviour
 {
-    public float damage = 10f;
+    public float hasar = 10f;
 
     public Camera mainCamera;
     public LayerMask resourceMask;
     public Karakter karakter;
+
     public Vector2 characterPosition { get; private set; }
 
     private GirisKarakter giris;
@@ -17,7 +18,11 @@ public class Weapon : MonoBehaviour
 
     public float yakinMesKarakterin = 5f;
 
+    public bool vurabilirMi;
+
     Animator anim;
+
+    public SesYoneticisi sesYonetim;
 
     private void Start()
     {
@@ -33,34 +38,43 @@ public class Weapon : MonoBehaviour
 
     public void Shoot()
     {
-        if (giris.saldiri && kullan)  // yeni input sistemde fareye erisime bak
+
+        if (kullan)
         {
-            giris.SaldiriGirisiniKullan();
-            Debug.Log("yarraaaaaaaaa");
-            characterPosition = transform.position;
+            giris.FareKonumunuVer();
+            Collider2D hitCollider = Physics2D.OverlapPoint(giris.fareKonumu,resourceMask);
 
-            Vector2 mouseWorldPosition = giris.fareKonumu;
-            //giris.saldiri = false;
+            //RaycastHit2D hitCollider = Physics2D.Raycast(giris.FareKonumunuVer(), Vector2.zero);
 
-            Collider2D[] hits = Physics2D.OverlapPointAll(mouseWorldPosition, resourceMask);
-
-
-
-            foreach (Collider2D hit in hits)
+            if (hitCollider != null && hitCollider.gameObject.tag == "kaynak") // && hitCollider.gameObject.tag == "kaynak"
             {
-                Health can = hit.gameObject.GetComponent<Health>();
+                characterPosition = transform.position;
+                float distanceToResource = Vector2.Distance(characterPosition, hitCollider.transform.position);
 
+                Kaynak hedef = hitCollider.gameObject.GetComponent<Kaynak>();
 
-                if (can != null)
+                if (distanceToResource < yakinMesKarakterin)
                 {
-                    float distanceToResource = Vector2.Distance(characterPosition, can.transform.position);
-                    //Debug.Log(distanceToResource);
+                    
 
-                    if (distanceToResource < yakinMesKarakterin)
+                    hedef.CerceveAc();
+
+                    if (giris.saldiri && vurabilirMi)
                     {
-                        can.TakeDamage(damage);
+                        giris.SaldiriGirisiniKullan();
+
+                        sesYonetim.Oynat("vurma");
+
+                        hedef.TakeDamage(hasar);
                         anim.SetBool("vur", true);
+
+                        vurabilirMi = false;
                     }
+
+                }
+                else
+                {
+                    hedef.CerceveKapa();
                 }
             }
 
@@ -76,17 +90,19 @@ public class Weapon : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, yakinMesKarakterin);
+        Gizmos.DrawWireSphere(transform.position, yakinMesKarakterin-0.5f);
     }
 
     public void VurAnim()
     {
         anim.SetBool("vur", false);
+        vurabilirMi = true; 
     }
 
     void SifirlaKullan()
     {
         kullan = false;
     }
+
 }
 

@@ -27,7 +27,9 @@ public class Karakter : MonoBehaviour
 
     public Weapon kazma;
     public GridKontrol gridKontrol;
+    public GameObject el;
 
+    public SesYoneticisi sesYonetim;
     private void Awake()
     {
         RB = GetComponent<Rigidbody2D>();
@@ -54,6 +56,12 @@ public class Karakter : MonoBehaviour
     {
         XhiziniKur(hareketHizi * giris.girisX);
         YhiziniKur(hareketHizi * giris.girisY);
+
+        //if (giris.girisX != 0 || giris.girisY != 0)
+        //{
+        //sesYonetim.Oynat("yurume");
+
+        //}
         
     }
 
@@ -111,6 +119,7 @@ public class Karakter : MonoBehaviour
         if (elindekiEsyaDegistigindeGeriCagir != null)
         {
             elindekiEsyaDegistigindeGeriCagir.Invoke();
+            el.GetComponent<SpriteRenderer>().sprite = esya.ikon;
         }
         switch (esya.nitelik)
             {

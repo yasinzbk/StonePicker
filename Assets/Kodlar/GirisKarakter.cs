@@ -15,17 +15,30 @@ public class GirisKarakter : MonoBehaviour
     //Gecici
 
     public bool saldiri { get; private set; }
-
-    public Vector3 fareKonumu { get; private set; }
     public float fareTekerlegi { get; private set; }
+
+    public Vector2 fareKonumu { get; private set; }
 
     public Weapon silah;
 
     public Camera mainCamera;
 
+
+    public SesYoneticisi sesYonetim;
     private void Start()
     {
         mainCamera = FindObjectOfType<Camera>();
+    }
+
+    private void Update()
+    {
+        if (hareketGirisi == Vector2.zero)
+        {
+            sesYonetim.Oynat("yurume");
+            //sesYonetim.Durdur("yurume");
+
+        }
+
     }
 
     public void HareketGirisi(InputAction.CallbackContext context)
@@ -45,10 +58,8 @@ public class GirisKarakter : MonoBehaviour
         if (context.started)
         {
             saldiri = true;
-            Vector3 mouse = Mouse.current.position.ReadValue();
-            mouse.z = 10f;
-            fareKonumu = mainCamera.ScreenToWorldPoint(mouse);
-            Debug.Log("fareKonumu: " + fareKonumu);
+            FareKonumunuVer();
+
         }
         else if (context.canceled)
         {
@@ -65,6 +76,14 @@ public class GirisKarakter : MonoBehaviour
         fareTekerlegi = context.ReadValue<float>(); // her harekette 120 ya da -120 degerini donduruyor
     }
 
+
+    public void FareKonumunuVer()
+    {
+        Vector3 mouse = Mouse.current.position.ReadValue();  // burda sadce mouse ile tiklandiginda mousun konumunu alýyor
+        mouse.z = 10f;
+        //mouse.z= -Camera.main.transform.position.z;
+        fareKonumu= mainCamera.ScreenToWorldPoint(mouse);
+    }
 
 
     private void OnEnable()  // fare icin gerekli

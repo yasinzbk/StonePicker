@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e84d4c19da54e9a4495b83458766d35a, type: 3}
-  m_Name: esyaDenem1 3
+  m_Name: TasCevher
   m_EditorClassIdentifier: 
-  isim: yteerty
-  ikon: {fileID: 21300000, guid: cfd524ab43ad7944a890b8b056e7bede, type: 3}
+  isim: TasCevher
+  ikon: {fileID: 21300000, guid: 803f74319497ad741992d3dd91d2d5c7, type: 3}
   toplandiMi: 1
   nitelik: 1

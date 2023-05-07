@@ -16,10 +16,10 @@ public class GridYoneticisi : MonoBehaviour
     {
         tilemap = GetComponent<Tilemap>();
         grid = GetComponent<GridMap>();
-        grid.Olustur(12, 12);
-        Set(1, 1, 2);
-        Set(2, 1, 2);
-        Set(1, 2, 2);
+        //grid.Olustur(12, 12);
+        //Set(1, 1, 2); //Silme
+        //Set(2, 1, 2);
+        //Set(1, 2, 2);
         TileMapiGuncelle();
     }
 
